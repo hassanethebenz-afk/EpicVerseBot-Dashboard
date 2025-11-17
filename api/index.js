@@ -44,11 +44,11 @@ p { font-size:1.2em; margin:10px 0; }
 .lang-toggle { position: fixed; top:20px; left:20px; padding:12px 18px; border:2px solid #00fff0; border-radius:12px; background: transparent; color:#00fff0; font-weight:bold; cursor:pointer; z-index:6; transition:0.3s; }
 .lang-toggle:hover { background:#00fff0; color:#000; }
 
-/* Discord Login */
-#login-card { background: rgba(0,0,30,0.85); padding:40px; border-radius:25px; box-shadow:0 0 60px rgba(0,255,255,0.5); max-width:400px; width:90%; margin:20px auto; animation: float 6s ease-in-out infinite; }
+/* Discord Login Button */
+#login-card { background: rgba(0,0,30,0.85); padding:40px; border-radius:25px; box-shadow:0 0 60px rgba(0,255,255,0.5); max-width:400px; width:90%; margin:20px auto; text-align:center; animation: float 6s ease-in-out infinite; }
 #login-card h2 { margin-bottom:20px; }
-#login-card input { width:100%; padding:15px; margin:10px 0; border-radius:10px; border:none; outline:none; }
-#login-card button { width:100%; margin-top:10px; }
+#login-card button { width:100%; padding:15px; font-size:1.1em; border-radius:15px; border:none; background:#7289da; color:white; font-weight:bold; cursor:pointer; transition:0.3s; box-shadow:0 0 30px rgba(114,137,218,0.5);}
+#login-card button:hover { background:#5b6eae; box-shadow:0 0 50px rgba(114,137,218,0.7); }
 
 /* Server Selection */
 #server-select { margin:20px 0; padding:15px; border-radius:12px; border:none; outline:none; width:100%; background: rgba(0,0,50,0.7); color:#00fff0; font-weight:bold; }
@@ -74,6 +74,13 @@ input:checked + .slider:before { transform: translateX(25px); }
 #support-btn { position:fixed; bottom:20px; right:340px; padding:15px 20px; background:#00fff0; color:#000; font-weight:bold; border-radius:15px; cursor:pointer; box-shadow:0 0 40px rgba(0,255,255,0.5); z-index:10; transition:0.3s; }
 #support-btn:hover { background:#00ff99; }
 
+/* Premium Subscriptions */
+.subscription { display:flex; justify-content:space-around; margin-top:20px; }
+.sub-card { padding:20px 30px; border-radius:20px; text-align:center; font-weight:bold; cursor:pointer; transition:0.3s; box-shadow:0 0 40px rgba(0,255,255,0.3);}
+.sub-alpha { background:#000; color:#fff; border:2px solid #333; }
+.sub-alpha:hover { box-shadow:0 0 60px rgba(255,255,255,0.6);}
+.sub-premium { background:gold; color:#000; border:2px solid #e6c200; }
+.sub-premium:hover { box-shadow:0 0 60px rgba(255,215,0,0.6);}
 </style>
 </head>
 <body>
@@ -88,13 +95,10 @@ input:checked + .slider:before { transform: translateX(25px); }
   </div>
 </section>
 
-<!-- Discord Login -->
+<!-- Discord Login Button -->
 <div id="login-card">
-  <h2>Discord Login</h2>
-  <input type="text" placeholder="Username" id="discord-username">
-  <input type="password" placeholder="Password" id="discord-password">
-  <button class="btn" onclick="loginDiscord()">Login</button>
-  <p id="login-status"></p>
+  <h2>Login with Discord</h2>
+  <button onclick="discordLogin()">Login with Discord</button>
 </div>
 
 <!-- Dashboard Panel -->
@@ -117,9 +121,11 @@ input:checked + .slider:before { transform: translateX(25px); }
   </div>
 
   <div class="card">
-    <h2>Premium Features</h2>
-    <div class="command"><span>Custom Prefix</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
-    <div class="command"><span>Priority Support</span><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></div>
+    <h2>Subscriptions</h2>
+    <div class="subscription">
+      <div class="sub-card sub-alpha">Alpha Subscription</div>
+      <div class="sub-card sub-premium">Premium Subscription</div>
+    </div>
   </div>
 
   <div class="card">
@@ -152,15 +158,7 @@ input:checked + .slider:before { transform: translateX(25px); }
   let currentLang='en';
   function toggleLang(){currentLang=currentLang==='en'?'ar':'en'; document.getElementById('desc').innerText=translations[currentLang].desc; document.querySelector('.lang-toggle').innerText=translations[currentLang].btnLang; document.dir=currentLang==='ar'?'rtl':'ltr';}
 
-  // Discord login simulation
-  function loginDiscord(){
-    const user=document.getElementById('discord-username').value;
-    const pass=document.getElementById('discord-password').value;
-    const status=document.getElementById('login-status');
-    if(!user||!pass){ status.innerText="Please enter username and password"; status.style.color="#ff0000"; return; }
-    status.innerText="Logging in..."; status.style.color="#00fff0";
-    setTimeout(()=>{ status.innerText="Login successful! Welcome "+user; status.style.color="#00ff00"; openDashboard(); },1500);
-  }
+  function discordLogin(){ alert("Redirecting to Discord OAuth2 login..."); openDashboard(); }
 
   // Mini support chat
   const chat=document.getElementById('support-chat'); let chatOpen=false;
