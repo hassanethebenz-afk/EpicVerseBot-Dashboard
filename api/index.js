@@ -7,41 +7,61 @@ export default function handler(req, res) {
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>EpicVerse Bot Dashboard</title>
-<style>
-  /* Import Google Font */
-  @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
 
+<style>
   body {
     margin: 0;
     padding: 0;
     font-family: 'Orbitron', sans-serif;
-    background: radial-gradient(circle at top left, #0f0c29, #302b63, #24243e);
-    color: #fff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
+    background: #0d0d14;
+    color: #00fff0;
     overflow-x: hidden;
+    position: relative;
+  }
+
+  /* Particle background */
+  body::before {
+    content: '';
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    top: -50%;
+    left: -50%;
+    background: radial-gradient(circle, rgba(0,255,255,0.1) 1px, transparent 1px);
+    background-size: 50px 50px;
+    animation: move 60s linear infinite;
+    z-index: 0;
+  }
+
+  @keyframes move {
+    0% { transform: translate(0,0); }
+    100% { transform: translate(-50px,-50px); }
   }
 
   .dashboard {
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+    margin: 50px auto;
+    padding: 40px;
+    border-radius: 25px;
+    background: rgba(10, 10, 20, 0.7);
+    box-shadow: 0 0 50px rgba(0,255,255,0.5), 0 0 100px rgba(0,255,255,0.2);
     text-align: center;
-    background: rgba(255, 255, 255, 0.05);
-    padding: 50px;
-    border-radius: 20px;
-    box-shadow: 0 0 50px rgba(0,255,255,0.5);
     animation: float 6s ease-in-out infinite;
   }
 
   @keyframes float {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-20px); }
+    0%,100% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
   }
 
   h1 {
-    font-size: 3em;
-    color: #00ffff;
-    text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 40px #00ffff;
+    font-size: 3.2em;
+    color: #00fff0;
+    text-shadow: 0 0 10px #00fff0, 0 0 20px #00fff0, 0 0 40px #00fff0;
+    margin-bottom: 20px;
   }
 
   p {
@@ -52,36 +72,39 @@ export default function handler(req, res) {
   .status {
     font-weight: bold;
     color: #00ff00;
+    text-shadow: 0 0 5px #00ff00;
   }
 
+  /* Buttons style */
   .buttons {
-    margin-top: 20px;
+    margin: 30px 0;
   }
 
   .btn {
     display: inline-block;
     margin: 10px;
-    padding: 15px 25px;
-    font-size: 1em;
+    padding: 15px 30px;
+    font-size: 1.1em;
     font-weight: bold;
-    color: #0ff;
-    background: transparent;
-    border: 2px solid #0ff;
-    border-radius: 15px;
+    color: #00fff0;
     text-decoration: none;
+    border: 2px solid #00fff0;
+    border-radius: 15px;
+    background: linear-gradient(135deg, rgba(0,255,255,0.1), rgba(0,255,255,0));
     position: relative;
     overflow: hidden;
-    transition: 0.3s;
+    transition: 0.4s;
     cursor: pointer;
+    box-shadow: 0 0 20px rgba(0,255,255,0.3);
   }
 
   .btn::before {
     content: '';
     position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
+    top: -100%;
+    left: -100%;
+    width: 300%;
+    height: 300%;
     background: rgba(0,255,255,0.2);
     transform: rotate(45deg);
     transition: 0.5s;
@@ -94,34 +117,50 @@ export default function handler(req, res) {
 
   .btn:hover {
     color: #000;
-    background: #0ff;
+    background: #00fff0;
+    box-shadow: 0 0 30px #00fff0, 0 0 60px rgba(0,255,255,0.5);
   }
 
+  /* Premium card */
   .premium {
     margin-top: 40px;
-    padding: 20px;
-    border: 2px solid #ff0;
-    border-radius: 15px;
+    padding: 30px;
+    border-radius: 20px;
     background: rgba(255,255,0,0.05);
-    text-shadow: 0 0 5px #ff0;
+    border: 2px solid #ff0;
+    box-shadow: 0 0 20px #ff0, 0 0 50px rgba(255,255,0,0.3);
+    animation: pulse 3s infinite;
   }
 
-  /* Language toggle button */
+  @keyframes pulse {
+    0%,100% { transform: scale(1); box-shadow: 0 0 20px #ff0, 0 0 50px rgba(255,255,0,0.3); }
+    50% { transform: scale(1.05); box-shadow: 0 0 40px #ff0, 0 0 80px rgba(255,255,0,0.5); }
+  }
+
+  /* Language toggle */
   .lang-toggle {
-    position: absolute;
+    position: fixed;
     top: 20px;
     right: 20px;
-    padding: 10px 15px;
-    border: 2px solid #0ff;
-    border-radius: 10px;
+    padding: 12px 18px;
+    border: 2px solid #00fff0;
+    border-radius: 12px;
     background: transparent;
-    color: #0ff;
-    cursor: pointer;
+    color: #00fff0;
     font-weight: bold;
+    cursor: pointer;
+    z-index: 2;
+    transition: 0.3s;
+  }
+
+  .lang-toggle:hover {
+    background: #00fff0;
+    color: #000;
   }
 </style>
 </head>
 <body>
+
 <button class="lang-toggle" onclick="toggleLang()">عربي</button>
 
 <div class="dashboard">
@@ -172,6 +211,7 @@ export default function handler(req, res) {
     document.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
   }
 </script>
+
 </body>
 </html>
   `);
