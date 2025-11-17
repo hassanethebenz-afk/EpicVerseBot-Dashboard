@@ -17,10 +17,10 @@ body { font-family: 'Orbitron', sans-serif; background: #0d0d14; color: #00fff0;
 canvas { display: block; }
 
 section.hero { min-height:100vh; display:flex; justify-content:center; align-items:center; text-align:center; flex-direction:column; position:relative; z-index:1; }
-
 h1 { font-size:3em; text-shadow:0 0 10px #00fff0,0 0 20px #00fff0,0 0 40px #00fff0; margin-bottom:20px; }
 p { font-size:1.2em; margin:10px 0; }
 
+/* Buttons */
 .btn { display:inline-block; margin:10px; padding:15px 30px; font-size:1.1em; font-weight:bold; color:#00fff0; text-decoration:none; border:2px solid #00fff0; border-radius:15px; background: linear-gradient(135deg, rgba(0,255,255,0.1), rgba(0,255,255,0)); position:relative; overflow:hidden; transition:0.4s; cursor:pointer; box-shadow:0 0 20px rgba(0,255,255,0.3); }
 .btn::before { content:''; position:absolute; top:-100%; left:-100%; width:300%; height:300%; background: rgba(0,255,255,0.2); transform: rotate(45deg); transition:0.5s; }
 .btn:hover::before { top:0; left:0; }
@@ -39,10 +39,11 @@ p { font-size:1.2em; margin:10px 0; }
 #close-dashboard { position:absolute; top:20px; right:20px; font-size:1.5em; background: transparent; border:none; color:#00fff0; cursor:pointer; text-shadow:0 0 10px #00fff0; }
 #close-dashboard:hover { color:#00ff00; }
 
+/* Language toggle */
 .lang-toggle { position: fixed; top:20px; left:20px; padding:12px 18px; border:2px solid #00fff0; border-radius:12px; background: transparent; color:#00fff0; font-weight:bold; cursor:pointer; z-index:6; transition:0.3s; }
 .lang-toggle:hover { background:#00fff0; color:#000; }
 
-/* Roblox Login */
+/* Discord Login */
 #login-card { background: rgba(0,0,30,0.85); padding:40px; border-radius:25px; box-shadow:0 0 60px rgba(0,255,255,0.5); max-width:400px; width:90%; margin:20px auto; animation: float 6s ease-in-out infinite; }
 #login-card h2 { margin-bottom:20px; }
 #login-card input { width:100%; padding:15px; margin:10px 0; border-radius:10px; border:none; outline:none; }
@@ -68,18 +69,18 @@ input:checked + .slider:before { transform: translateX(25px); }
 
 <section class="hero">
   <h1>EpicVerse Bot Dashboard</h1>
-  <p id="desc">Welcome! Manage your server with our futuristic bot dashboard.</p>
+  <p id="desc">Welcome! Manage your Discord server with our futuristic bot dashboard.</p>
   <div>
     <button class="btn" onclick="openDashboard()">Open Dashboard</button>
   </div>
 </section>
 
-<!-- Roblox Login -->
+<!-- Discord Login -->
 <div id="login-card">
-  <h2>Roblox Login</h2>
-  <input type="text" placeholder="Username" id="roblox-username">
-  <input type="password" placeholder="Password" id="roblox-password">
-  <button class="btn" onclick="loginRoblox()">Login</button>
+  <h2>Discord Login</h2>
+  <input type="text" placeholder="Username" id="discord-username">
+  <input type="password" placeholder="Password" id="discord-password">
+  <button class="btn" onclick="loginDiscord()">Login</button>
   <p id="login-status"></p>
 </div>
 
@@ -89,20 +90,16 @@ input:checked + .slider:before { transform: translateX(25px); }
 
   <h2>Select Your Server</h2>
   <select id="server-select">
-    <option>Server 1 - My Roblox Group</option>
-    <option>Server 2 - EpicVerse Adventures</option>
-    <option>Server 3 - Vynox Fan Club</option>
+    <option>Server 1 - EpicVerse Fans</option>
+    <option>Server 2 - Discord Adventure</option>
+    <option>Server 3 - Vynox Group</option>
   </select>
 
   <div class="card">
     <h2>Commands & Modules</h2>
     <div class="command">
-      <span>Welcome Messages</span>
-      <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
-    </div>
-    <div class="command">
       <span>Moderation</span>
-      <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+      <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
     </div>
     <div class="command">
       <span>Fun Commands</span>
@@ -110,6 +107,10 @@ input:checked + .slider:before { transform: translateX(25px); }
     </div>
     <div class="command">
       <span>Music</span>
+      <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+    </div>
+    <div class="command">
+      <span>Custom Commands</span>
       <label class="switch"><input type="checkbox"><span class="slider"></span></label>
     </div>
   </div>
@@ -129,7 +130,7 @@ input:checked + .slider:before { transform: translateX(25px); }
   <div class="card">
     <h2>Support & Invite</h2>
     <a href="https://discord.gg/CQfr6aTe6f" class="btn" target="_blank">Join Support Server</a>
-    <a href="https://discord.com/oauth2/authorize?client_id=1248801648067739699&permissions=8&integration_type=1&scope=bot" class="btn" target="_blank">Invite Bot</a>
+    <a href="https://discord.com/oauth2/authorize?client_id=1248801648067739699&permissions=8&scope=bot" class="btn" target="_blank">Invite Bot</a>
   </div>
 
 </div>
@@ -137,27 +138,27 @@ input:checked + .slider:before { transform: translateX(25px); }
 <div id="tech-wallpaper"><canvas id="canvas"></canvas></div>
 
 <script>
-  // Open/Close Dashboard
+  // Dashboard open/close
   const panel=document.getElementById('dashboard-panel');
   function openDashboard(){ panel.classList.add('open'); }
   function closeDashboard(){ panel.classList.remove('open'); }
 
   // Language toggle
-  const translations={ar:{desc:"مرحباً! إدارة السيرفر الخاص بك باستخدام داشبورد بوت مستقبلية.",btnLang:"English"},en:{desc:"Welcome! Manage your server with our futuristic bot dashboard.",btnLang:"عربي"}};
+  const translations={ar:{desc:"مرحباً! إدارة سيرفرك على Discord باستخدام داشبورد بوت مستقبلية.",btnLang:"English"},en:{desc:"Welcome! Manage your Discord server with our futuristic bot dashboard.",btnLang:"عربي"}};
   let currentLang='en';
   function toggleLang(){currentLang=currentLang==='en'?'ar':'en'; document.getElementById('desc').innerText=translations[currentLang].desc; document.querySelector('.lang-toggle').innerText=translations[currentLang].btnLang; document.dir=currentLang==='ar'?'rtl':'ltr';}
 
-  // Roblox Login Simulation
-  function loginRoblox(){
-    const user=document.getElementById('roblox-username').value;
-    const pass=document.getElementById('roblox-password').value;
+  // Discord Login Simulation
+  function loginDiscord(){
+    const user=document.getElementById('discord-username').value;
+    const pass=document.getElementById('discord-password').value;
     const status=document.getElementById('login-status');
     if(!user||!pass){ status.innerText="Please enter username and password"; status.style.color="#ff0000"; return; }
     status.innerText="Logging in..."; status.style.color="#00fff0";
     setTimeout(()=>{ status.innerText="Login successful! Welcome "+user; status.style.color="#00ff00"; openDashboard(); },1500);
   }
 
-  // Tech animated wallpaper
+  // Animated tech wallpaper
   const canvas=document.getElementById('canvas'); const ctx=canvas.getContext('2d'); let w,h,lines=[];
   function resize(){ w=canvas.width=window.innerWidth; h=canvas.height=window.innerHeight; }
   window.addEventListener('resize',resize); resize();
@@ -165,8 +166,8 @@ input:checked + .slider:before { transform: translateX(25px); }
   for(let i=0;i<80;i++)lines.push(new Line());
   function animate(){ctx.clearRect(0,0,w,h); lines.forEach(l=>{l.update();l.draw();}); requestAnimationFrame(animate);}
   animate();
-
 </script>
+
 </body>
 </html>
   `);
