@@ -27,6 +27,8 @@ export default function handler(req, res) {
   --deep-space: #050510;
   --cosmic-purple: #1a0a2a;
   --matrix-green: #00ff41;
+  --active-dev: #5865F2;
+  --nexbot: #FF3366;
 }
 
 body { 
@@ -98,60 +100,9 @@ body {
   z-index: -2;
 }
 
-.quantum-grid::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: 
-    linear-gradient(45deg, rgba(0, 255, 240, 0.02) 25%, transparent 25%),
-    linear-gradient(-45deg, rgba(0, 255, 240, 0.02) 25%, transparent 25%),
-    linear-gradient(45deg, transparent 75%, rgba(0, 255, 240, 0.02) 75%),
-    linear-gradient(-45deg, transparent 75%, rgba(0, 255, 240, 0.02) 75%);
-  background-size: 20px 20px;
-  animation: diagonalGrid 40s linear infinite;
-}
-
 @keyframes quantumGrid {
   0% { transform: translate(0, 0); }
   100% { transform: translate(50px, 50px); }
-}
-
-@keyframes diagonalGrid {
-  0% { transform: translate(0, 0); }
-  100% { transform: translate(20px, 20px); }
-}
-
-/* Holographic Interface Elements */
-.hologram-effect {
-  position: relative;
-  overflow: hidden;
-}
-
-.hologram-effect::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: linear-gradient(
-    45deg,
-    transparent,
-    rgba(0, 255, 240, 0.1),
-    transparent,
-    rgba(185, 103, 255, 0.1),
-    transparent
-  );
-  animation: hologramScan 3s linear infinite;
-  pointer-events: none;
-}
-
-@keyframes hologramScan {
-  0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
-  100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
 }
 
 /* Premium Header with Advanced Effects */
@@ -411,7 +362,6 @@ body {
   overflow: hidden;
   transition: all 0.4s ease;
   animation: quantumFloat 6s ease-in-out infinite;
-  perspective: 1000px;
 }
 
 .stat-card:nth-child(1) { animation-delay: 0s; }
@@ -420,15 +370,8 @@ body {
 .stat-card:nth-child(4) { animation-delay: 3s; }
 
 @keyframes quantumFloat {
-  0%, 100% { 
-    transform: translateY(0px) rotateX(0deg) rotateY(0deg); 
-  }
-  25% { 
-    transform: translateY(-15px) rotateX(2deg) rotateY(1deg); 
-  }
-  75% { 
-    transform: translateY(-8px) rotateX(-1deg) rotateY(-1deg); 
-  }
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
 }
 
 .stat-card::before {
@@ -448,10 +391,8 @@ body {
 }
 
 .stat-card:hover {
-  transform: translateY(-10px) scale(1.05) rotateX(5deg);
-  box-shadow: 
-    0 20px 50px rgba(0, 255, 240, 0.3),
-    0 0 100px rgba(185, 103, 255, 0.2);
+  transform: translateY(-10px) scale(1.05);
+  box-shadow: 0 20px 50px rgba(0, 255, 240, 0.3);
   border-color: var(--neon-purple);
 }
 
@@ -477,18 +418,6 @@ body {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   margin-bottom: 10px;
-  animation: numberCount 2s ease-out;
-}
-
-@keyframes numberCount {
-  from { 
-    transform: scale(0.5);
-    opacity: 0;
-  }
-  to { 
-    transform: scale(1);
-    opacity: 1;
-  }
 }
 
 .stat-label {
@@ -527,12 +456,6 @@ body {
   margin-bottom: 40px;
   padding-bottom: 20px;
   border-bottom: 2px solid rgba(0, 255, 240, 0.3);
-  animation: headerGlow 3s ease-in-out infinite alternate;
-}
-
-@keyframes headerGlow {
-  0% { border-bottom-color: rgba(0, 255, 240, 0.3); }
-  100% { border-bottom-color: rgba(185, 103, 255, 0.6); }
 }
 
 .dashboard-title {
@@ -566,18 +489,6 @@ body {
   gap: 10px;
   margin-bottom: 30px;
   flex-wrap: wrap;
-  animation: navSlideIn 0.8s ease 0.3s both;
-}
-
-@keyframes navSlideIn {
-  from {
-    opacity: 0;
-    transform: translateX(-30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
 }
 
 .nav-tab {
@@ -632,11 +543,11 @@ body {
 @keyframes contentFadeIn {
   from { 
     opacity: 0;
-    transform: translateY(20px) scale(0.95);
+    transform: translateY(20px);
   }
   to { 
     opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: translateY(0);
   }
 }
 
@@ -657,23 +568,6 @@ body {
   transition: all 0.4s ease;
   position: relative;
   overflow: hidden;
-  animation: cardEntrance 0.6s ease both;
-}
-
-.feature-card:nth-child(1) { animation-delay: 0.1s; }
-.feature-card:nth-child(2) { animation-delay: 0.2s; }
-.feature-card:nth-child(3) { animation-delay: 0.3s; }
-.feature-card:nth-child(4) { animation-delay: 0.4s; }
-
-@keyframes cardEntrance {
-  from {
-    opacity: 0;
-    transform: translateY(30px) rotateX(10deg);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) rotateX(0);
-  }
 }
 
 .feature-card::before {
@@ -692,7 +586,7 @@ body {
 }
 
 .feature-card:hover {
-  transform: translateY(-5px) rotateY(5deg);
+  transform: translateY(-5px);
   border-color: var(--neon-purple);
   box-shadow: 0 15px 40px rgba(0, 255, 240, 0.2);
 }
@@ -703,12 +597,6 @@ body {
   background: linear-gradient(45deg, var(--neon-cyan), var(--neon-purple));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: iconGlow 2s ease-in-out infinite alternate;
-}
-
-@keyframes iconGlow {
-  0% { filter: drop-shadow(0 0 5px rgba(0, 255, 240, 0.5)); }
-  100% { filter: drop-shadow(0 0 15px rgba(185, 103, 255, 0.8)); }
 }
 
 .feature-title {
@@ -731,18 +619,6 @@ body {
   padding: 30px;
   backdrop-filter: blur(10px);
   margin: 20px 0;
-  animation: containerSlide 0.6s ease;
-}
-
-@keyframes containerSlide {
-  from {
-    opacity: 0;
-    transform: translateX(-30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
 }
 
 .command-search {
@@ -779,22 +655,6 @@ body {
   padding: 15px;
   border-bottom: 1px solid rgba(0, 255, 240, 0.1);
   transition: all 0.3s ease;
-  animation: itemSlide 0.4s ease both;
-}
-
-.command-item:nth-child(1) { animation-delay: 0.1s; }
-.command-item:nth-child(2) { animation-delay: 0.2s; }
-.command-item:nth-child(3) { animation-delay: 0.3s; }
-
-@keyframes itemSlide {
-  from {
-    opacity: 0;
-    transform: translateX(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
 }
 
 .command-item:hover {
@@ -842,7 +702,6 @@ body {
   background-color: #555;
   transition: .4s;
   border-radius: 25px;
-  box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
 }
 
 .toggle-slider:before {
@@ -855,21 +714,18 @@ body {
   background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
   transition: .4s;
   border-radius: 50%;
-  box-shadow: 0 0 10px rgba(0, 255, 240, 0.5);
 }
 
 input:checked + .toggle-slider {
   background-color: var(--neon-cyan);
-  box-shadow: 0 0 20px rgba(0, 255, 240, 0.5);
 }
 
 input:checked + .toggle-slider:before {
   transform: translateX(25px);
   background: #000;
-  box-shadow: 0 0 5px rgba(0,0,0,0.5);
 }
 
-/* Creator Section with Hologram */
+/* Creator Section with Badges */
 .creator-section {
   text-align: center;
   margin: 50px 0;
@@ -879,35 +735,6 @@ input:checked + .toggle-slider:before {
   border: 1px solid rgba(0, 255, 240, 0.2);
   position: relative;
   overflow: hidden;
-  animation: creatorReveal 1s ease 0.5s both;
-}
-
-@keyframes creatorReveal {
-  from {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-.creator-section::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(45deg, transparent, rgba(0, 255, 240, 0.1), transparent);
-  animation: creatorGlow 4s ease-in-out infinite;
-  pointer-events: none;
-}
-
-@keyframes creatorGlow {
-  0%, 100% { opacity: 0.3; }
-  50% { opacity: 0.7; }
 }
 
 .creator-avatar {
@@ -916,16 +743,13 @@ input:checked + .toggle-slider:before {
   border-radius: 50%;
   border: 3px solid var(--neon-cyan);
   margin-bottom: 20px;
-  box-shadow: 
-    0 0 30px rgba(0, 255, 240, 0.5),
-    0 0 60px rgba(185, 103, 255, 0.3);
+  box-shadow: 0 0 30px rgba(0, 255, 240, 0.5);
   animation: avatarFloat 4s ease-in-out infinite;
 }
 
 @keyframes avatarFloat {
-  0%, 100% { transform: translateY(0px) rotate(0deg); }
-  33% { transform: translateY(-10px) rotate(1deg); }
-  66% { transform: translateY(-5px) rotate(-1deg); }
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
 }
 
 .creator-name {
@@ -935,12 +759,6 @@ input:checked + .toggle-slider:before {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   margin-bottom: 10px;
-  animation: nameGlow 3s ease-in-out infinite alternate;
-}
-
-@keyframes nameGlow {
-  0% { text-shadow: 0 0 20px rgba(255, 107, 0, 0.5); }
-  100% { text-shadow: 0 0 40px rgba(255, 215, 0, 0.8); }
 }
 
 .creator-title {
@@ -949,7 +767,47 @@ input:checked + .toggle-slider:before {
   margin-bottom: 20px;
 }
 
-/* Language Toggle with Advanced Effects */
+.badges-container {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin: 20px 0;
+  flex-wrap: wrap;
+}
+
+.badge {
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  animation: badgeGlow 2s ease-in-out infinite alternate;
+}
+
+.badge.active-dev {
+  background: linear-gradient(45deg, var(--active-dev), #7983f5);
+  box-shadow: 0 0 20px rgba(88, 101, 242, 0.5);
+}
+
+.badge.nexbot {
+  background: linear-gradient(45deg, var(--nexbot), #ff6699);
+  box-shadow: 0 0 20px rgba(255, 51, 102, 0.5);
+}
+
+.badge.verified {
+  background: linear-gradient(45deg, var(--neon-green), #00cc66);
+  box-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+}
+
+@keyframes badgeGlow {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.05); }
+}
+
+/* Language Toggle */
 .lang-toggle {
   position: fixed;
   top: 20px;
@@ -965,36 +823,152 @@ input:checked + .toggle-slider:before {
   transition: all 0.3s ease;
   backdrop-filter: blur(10px);
   font-family: 'Exo 2', sans-serif;
-  animation: langSlide 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-@keyframes langSlide {
-  from {
-    transform: translateX(-100%);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
 }
 
 .lang-toggle:hover {
   background: rgba(0, 255, 240, 0.2);
   box-shadow: 0 0 20px rgba(0, 255, 240, 0.3);
-  transform: scale(1.05);
 }
 
-/* Matrix Rain Effect */
-.matrix-rain {
-  position: fixed;
+/* Advanced Subscription Cards */
+.subscription-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 30px;
+  margin: 50px 0;
+}
+
+.subscription-card {
+  background: linear-gradient(135deg, rgba(20, 20, 40, 0.8), rgba(10, 10, 30, 0.9));
+  border: 2px solid;
+  border-radius: 25px;
+  padding: 40px 30px;
+  text-align: center;
+  backdrop-filter: blur(10px);
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.subscription-card::before {
+  content: '';
+  position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: -1;
-  opacity: 0.1;
+  right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, var(--neon-cyan), var(--neon-purple));
+}
+
+.subscription-card.alpha {
+  border-color: rgba(0, 255, 240, 0.5);
+}
+
+.subscription-card.premium {
+  border-color: rgba(255, 215, 0, 0.5);
+}
+
+.subscription-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 25px 60px rgba(0, 255, 240, 0.3);
+}
+
+.subscription-card.premium:hover {
+  box-shadow: 0 25px 60px rgba(255, 215, 0, 0.4);
+}
+
+.subscription-badge {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: linear-gradient(45deg, var(--neon-cyan), var(--neon-purple));
+  color: #000;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.subscription-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  background: linear-gradient(45deg, var(--neon-cyan), var(--neon-purple));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.subscription-card.premium .subscription-title {
+  background: linear-gradient(45deg, #ffd700, #ff6b00);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.subscription-price {
+  font-size: 3rem;
+  font-weight: 900;
+  font-family: 'Orbitron', sans-serif;
+  margin-bottom: 30px;
+  color: var(--neon-cyan);
+}
+
+.subscription-card.premium .subscription-price {
+  color: #ffd700;
+}
+
+.subscription-features {
+  list-style: none;
+  margin-bottom: 30px;
+}
+
+.subscription-features li {
+  padding: 10px 0;
+  color: rgba(0, 255, 240, 0.9);
+  border-bottom: 1px solid rgba(0, 255, 240, 0.1);
+}
+
+.subscription-features li:last-child {
+  border-bottom: none;
+}
+
+.subscription-features li i {
+  margin-right: 10px;
+  color: var(--neon-green);
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 40px 20px;
+  border-top: 1px solid rgba(0, 255, 240, 0.2);
+  margin-top: 60px;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin: 20px 0;
+  flex-wrap: wrap;
+}
+
+.footer-link {
+  color: rgba(0, 255, 240, 0.7);
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.footer-link:hover {
+  color: var(--neon-cyan);
+  transform: translateY(-2px);
+}
+
+.copyright {
+  color: rgba(0, 255, 240, 0.5);
+  font-size: 0.9rem;
+  margin-top: 20px;
 }
 
 /* Responsive Design */
@@ -1008,6 +982,10 @@ input:checked + .toggle-slider:before {
   }
   
   .feature-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .subscription-grid {
     grid-template-columns: 1fr;
   }
   
@@ -1032,25 +1010,11 @@ input:checked + .toggle-slider:before {
     flex-direction: column;
     align-items: center;
   }
-}
-
-/* Loading Animations */
-.loading-bar {
-  width: 100%;
-  height: 3px;
-  background: linear-gradient(90deg, var(--neon-cyan), var(--neon-purple));
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 9999;
-  animation: loadingProgress 2s ease-in-out infinite;
-  transform-origin: left;
-}
-
-@keyframes loadingProgress {
-  0% { transform: scaleX(0); }
-  50% { transform: scaleX(0.7); }
-  100% { transform: scaleX(0); }
+  
+  .footer-links {
+    flex-direction: column;
+    gap: 15px;
+  }
 }
 
 /* Particle Animation */
@@ -1060,159 +1024,9 @@ input:checked + .toggle-slider:before {
   height: 100%;
   z-index: -1;
 }
-
-/* Advanced Subscription Cards */
-.subscription-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: 30px;
-  margin: 50px 0;
-}
-
-.subscription-card {
-  background: linear-gradient(135deg, rgba(20, 20, 40, 0.8), rgba(10, 10, 30, 0.9));
-  border: 2px solid;
-  border-radius: 25px;
-  padding: 40px 30px;
-  text-align: center;
-  backdrop-filter: blur(10px);
-  transition: all 0.4s ease;
-  position: relative;
-  overflow: hidden;
-  animation: cardPop 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-}
-
-.subscription-card:nth-child(1) { animation-delay: 0.1s; }
-.subscription-card:nth-child(2) { animation-delay: 0.2s; }
-
-@keyframes cardPop {
-  from {
-    opacity: 0;
-    transform: scale(0.8) rotateY(20deg);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1) rotateY(0);
-  }
-}
-
-.subscription-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 5px;
-  background: linear-gradient(90deg, var(--neon-cyan), var(--neon-purple));
-  animation: subscriptionGlow 3s ease-in-out infinite alternate;
-}
-
-@keyframes subscriptionGlow {
-  0% { background: linear-gradient(90deg, var(--neon-cyan), var(--neon-purple)); }
-  100% { background: linear-gradient(90deg, var(--neon-purple), var(--neon-pink)); }
-}
-
-.subscription-card.alpha {
-  border-color: rgba(0, 255, 240, 0.5);
-}
-
-.subscription-card.premium {
-  border-color: rgba(255, 215, 0, 0.5);
-}
-
-.subscription-card:hover {
-  transform: translateY(-10px) scale(1.02) rotateY(5deg);
-  box-shadow: 0 25px 60px rgba(0, 255, 240, 0.3);
-}
-
-.subscription-card.premium:hover {
-  box-shadow: 0 25px 60px rgba(255, 215, 0, 0.4);
-}
-
-.subscription-badge {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background: linear-gradient(45deg, var(--neon-cyan), var(--neon-purple));
-  color: #000;
-  padding: 8px 16px;
-  border-radius: 20px;
-  font-size: 0.8rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  animation: badgeFloat 3s ease-in-out infinite;
-}
-
-@keyframes badgeFloat {
-  0%, 100% { transform: translateY(0px) rotate(0deg); }
-  50% { transform: translateY(-5px) rotate(2deg); }
-}
-
-.subscription-title {
-  font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: 20px;
-  background: linear-gradient(45deg, var(--neon-cyan), var(--neon-purple));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.subscription-card.premium .subscription-title {
-  background: linear-gradient(45deg, #ffd700, #ff6b00);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.subscription-price {
-  font-size: 3rem;
-  font-weight: 900;
-  font-family: 'Orbitron', sans-serif;
-  margin-bottom: 30px;
-  color: var(--neon-cyan);
-  animation: pricePulse 2s ease-in-out infinite;
-}
-
-@keyframes pricePulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-}
-
-.subscription-card.premium .subscription-price {
-  color: #ffd700;
-}
-
-.subscription-features {
-  list-style: none;
-  margin-bottom: 30px;
-}
-
-.subscription-features li {
-  padding: 10px 0;
-  color: rgba(0, 255, 240, 0.9);
-  border-bottom: 1px solid rgba(0, 255, 240, 0.1);
-  transition: all 0.3s ease;
-}
-
-.subscription-features li:hover {
-  color: var(--neon-cyan);
-  transform: translateX(5px);
-}
-
-.subscription-features li:last-child {
-  border-bottom: none;
-}
-
-.subscription-features li i {
-  margin-right: 10px;
-  color: var(--neon-green);
-}
 </style>
 </head>
 <body>
-
-<!-- Loading Bar -->
-<div class="loading-bar"></div>
 
 <!-- Advanced Background System -->
 <div class="parallax-bg">
@@ -1223,13 +1037,12 @@ input:checked + .toggle-slider:before {
 
 <div class="quantum-grid"></div>
 <div id="particles-js"></div>
-<div class="matrix-rain" id="matrixRain"></div>
 
 <!-- Premium Header -->
 <header class="premium-header">
   <div style="display: flex; align-items: center;">
     <div class="logo">EPICVERSE</div>
-    <div class="creator-badge">by Vynux</div>
+    <div class="creator-badge">by Vynox</div>
   </div>
   <div class="header-controls">
     <button class="premium-btn btn-secondary" onclick="toggleLang()">
@@ -1295,23 +1108,40 @@ input:checked + .toggle-slider:before {
 
 <!-- Creator Section -->
 <section class="creator-section">
-  <img src="https://cdn.discordapp.com/avatars/1248801648067739699/a_1234567890abcdef.png?size=256" alt="Vynux" class="creator-avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
-  <h2 class="creator-name">Vynux</h2>
+  <img src="https://cdn.discordapp.com/avatars/566383841426800650/a_c5a7a3a3a3a3a3a3a3a3a3a3a3a3a3a3.webp?size=256" alt="Vynox" class="creator-avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+  <h2 class="creator-name">Vynox</h2>
   <p class="creator-title">Quantum Developer & System Architect</p>
-  <p style="color: rgba(0, 255, 240, 0.8); max-width: 600px; margin: 0 auto; line-height: 1.6;">
-    Visionary developer pushing the boundaries of Discord automation. EpicVerse Pro represents the culmination of 
-    cutting-edge web technologies, AI integration, and enterprise-grade architecture for unparalleled performance.
+  
+  <div class="badges-container">
+    <div class="badge active-dev">
+      <i class="fas fa-badge-check"></i>
+      Active Developer
+    </div>
+    <div class="badge nexbot">
+      <i class="fas fa-robot"></i>
+      NexBot Certified
+    </div>
+    <div class="badge verified">
+      <i class="fas fa-shield-alt"></i>
+      Verified Bot
+    </div>
+  </div>
+  
+  <p style="color: rgba(0, 255, 240, 0.8); max-width: 600px; margin: 20px auto; line-height: 1.6;">
+    Visionary developer pushing the boundaries of Discord automation. With over 3 years of experience in bot development, 
+    Vynox has created EpicVerse Pro to deliver enterprise-grade performance with cutting-edge AI integration and quantum-level architecture.
   </p>
+  
   <div class="quick-actions" style="margin-top: 30px;">
-    <button class="premium-btn btn-secondary">
-      <i class="fas fa-envelope"></i> Contact
-    </button>
-    <button class="premium-btn btn-tertiary">
-      <i class="fas fa-heart"></i> Support Project
-    </button>
-    <button class="premium-btn btn-primary">
-      <i class="fas fa-code"></i> API Docs
-    </button>
+    <a href="https://discord.com/users/566383841426800650" class="premium-btn btn-secondary" target="_blank">
+      <i class="fas fa-user"></i> Discord Profile
+    </a>
+    <a href="https://github.com/Vynox" class="premium-btn btn-tertiary" target="_blank">
+      <i class="fab fa-github"></i> GitHub
+    </a>
+    <a href="https://top.gg/bot/1248801648067739699" class="premium-btn btn-primary" target="_blank">
+      <i class="fas fa-chart-line"></i> Top.gg
+    </a>
   </div>
 </section>
 
@@ -1565,11 +1395,38 @@ input:checked + .toggle-slider:before {
        class="premium-btn btn-secondary" target="_blank" style="margin: 0 10px;">
       <i class="fas fa-headset"></i> Support Server
     </a>
-    <button class="premium-btn btn-tertiary" style="margin: 0 10px;">
+    <button class="premium-btn btn-tertiary" style="margin: 0 10px;" onclick="exportConfig()">
       <i class="fas fa-download"></i> Export Config
     </button>
   </div>
 </div>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-links">
+    <a href="https://discord.gg/j3AUBUup" class="footer-link" target="_blank">
+      <i class="fas fa-headset"></i> Support Server
+    </a>
+    <a href="https://discord.com/oauth2/authorize?client_id=1248801648067739699&permissions=8&scope=bot" class="footer-link" target="_blank">
+      <i class="fas fa-plus"></i> Invite Bot
+    </a>
+    <a href="https://top.gg/bot/1248801648067739699" class="footer-link" target="_blank">
+      <i class="fas fa-chart-line"></i> Top.gg
+    </a>
+    <a href="https://discord.com/users/566383841426800650" class="footer-link" target="_blank">
+      <i class="fas fa-user"></i> Contact Owner
+    </a>
+    <a href="https://github.com/Vynox" class="footer-link" target="_blank">
+      <i class="fab fa-github"></i> GitHub
+    </a>
+    <a href="#" class="footer-link" onclick="openDashboard()">
+      <i class="fas fa-cog"></i> Dashboard
+    </a>
+  </div>
+  <div class="copyright">
+    &copy; 2024 EpicVerse Pro. Created with ❤️ by Vynox. All rights reserved.
+  </div>
+</footer>
 
 <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 <script>
@@ -1682,7 +1539,6 @@ function toggleCommand(commandName, enabled) {
   const command = commands.find(cmd => cmd.name === commandName);
   if (command) {
     command.enabled = enabled;
-    // Quantum API integration would go here
     console.log(`Quantum Command ${commandName} ${enabled ? 'activated' : 'deactivated'}`);
   }
 }
@@ -1696,6 +1552,24 @@ function showCommands() {
 function showSettings() {
   openDashboard();
   switchTab('moderation');
+}
+
+// Export functionality
+function exportConfig() {
+  const config = {
+    server: document.getElementById('serverSelect').value,
+    commands: commands.filter(cmd => cmd.enabled),
+    timestamp: new Date().toISOString(),
+    version: "EpicVerse Pro v2.0"
+  };
+  
+  const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(config, null, 2));
+  const downloadAnchorNode = document.createElement('a');
+  downloadAnchorNode.setAttribute("href", dataStr);
+  downloadAnchorNode.setAttribute("download", "epicverse-config.json");
+  document.body.appendChild(downloadAnchorNode);
+  downloadAnchorNode.click();
+  downloadAnchorNode.remove();
 }
 
 // Quantum Particles System
@@ -1733,49 +1607,9 @@ particlesJS('particles-js', {
   }
 });
 
-// Matrix Rain Effect
-function createMatrixRain() {
-  const canvas = document.getElementById('matrixRain');
-  const ctx = canvas.getContext('2d');
-  
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-  
-  const chars = "01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン";
-  const charArray = chars.split("");
-  const fontSize = 14;
-  const columns = canvas.width / fontSize;
-  const drops = [];
-  
-  for(let i = 0; i < columns; i++) {
-    drops[i] = 1;
-  }
-  
-  function draw() {
-    ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    
-    ctx.fillStyle = "#0F0";
-    ctx.font = fontSize + "px arial";
-    
-    for(let i = 0; i < drops.length; i++) {
-      const text = charArray[Math.floor(Math.random() * charArray.length)];
-      ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-      
-      if(drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-        drops[i] = 0;
-      }
-      drops[i]++;
-    }
-  }
-  
-  setInterval(draw, 33);
-}
-
 // Quantum Initialization
 document.addEventListener('DOMContentLoaded', function() {
   populateCommands();
-  createMatrixRain();
   
   // Quantum animations
   const cards = document.querySelectorAll('.stat-card');
@@ -1783,40 +1617,14 @@ document.addEventListener('DOMContentLoaded', function() {
     card.style.animationDelay = `${index * 0.5}s`;
   });
   
-  // Quantum performance monitoring
   console.log('🚀 EpicVerse Quantum Dashboard Initialized');
+  console.log('👤 Owner: Vynox (566383841426800650)');
   console.log('📊 System Status: Optimal');
   console.log('⚡ Performance: Quantum Level');
   console.log('🎯 Features: 150+ Commands Available');
 });
-
-// Quantum Analytics
-function trackEvent(eventName, data) {
-  // Quantum analytics integration
-  console.log(`📈 Event: ${eventName}`, data);
-}
-
-// Export functionality
-function exportConfig() {
-  const config = {
-    server: document.getElementById('serverSelect').value,
-    commands: commands.filter(cmd => cmd.enabled),
-    timestamp: new Date().toISOString()
-  };
-  
-  const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(config, null, 2));
-  const downloadAnchorNode = document.createElement('a');
-  downloadAnchorNode.setAttribute("href", dataStr);
-  downloadAnchorNode.setAttribute("download", "epicverse-config.json");
-  document.body.appendChild(downloadAnchorNode);
-  downloadAnchorNode.click();
-  downloadAnchorNode.remove();
-  
-  trackEvent('config_export', config);
-}
 </script>
 </body>
 </html>
   `);
 }
-
